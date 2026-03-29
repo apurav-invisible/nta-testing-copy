@@ -1,0 +1,65 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body{
+    width: 100%;
+    height: 100%;
+    background-color: #4800ff;
+    
+
+}
+#login-container{
+    width:400px;
+    height: 400px;
+    position: absolute;
+    background-color: #ffffff;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 10px;
+    box-shadow: 0px 15px 40px rgba(0, 0, 0, 0.2);}
+
+#heading{
+    padding: 40px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+#username, #password{
+    width: 80%;
+    padding: 10px;
+    margin: 20px auto;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    display: block;
+}
+#login-button{
+    width: 78%;
+    padding: 10px;
+    margin: 25px auto;
+    border-radius: 5px; 
+    display: block;
+}
+.credetials{
+    width: 80%;
+    height: 10px;
+    padding: 0px;
+    margin: 1px auto;
+    border-radius: 5px;
+    display: block;
+    font-family: Arial, Helvetica, sans-serif;
+    color: rgb(136, 136, 136)
+}
+hr {
+    width: 80%;
+    margin: -15px auto 30px;
+    border: 1px solid #9d9d9d;
+}
+
+#necessary{
+    text-align: center;
+    margin: -20px auto;
+    color: hsl(38, 100%, 50%);
+}
