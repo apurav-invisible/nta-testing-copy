@@ -2,65 +2,100 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>JEE Main Mock Test</title>
   <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
+  <div id="header">
+    <div id="candidate-info">
+      <img src="https://via.placeholder.com/50" alt="candidate" id="candidate-img"/>
+      <div>
+        <p>Candidate Name : <span id="candidate-name">Loading...</span></p>
+        <p>Exam Name : <span id="exam-name">JEE-Main</span></p>
+        <p>Remaining Time : <span id="timer">02:59:54</span></p>
+      </div>
+    </div>
+    <div id="lang-select">
+      <select>
+        <option>English</option>
+        <option>Hindi</option>
+      </select>
+    </div>
+  </div>
 
-  
-  <header>
-    <span>JEE Main — Mock Test</span>
-    <span id="timer">03:00:00</span>
-  </header>
-
-  
   <div id="subject-tabs">
     <button class="tab active" data-subject="physics">Physics</button>
     <button class="tab" data-subject="chemistry">Chemistry</button>
     <button class="tab" data-subject="maths">Maths</button>
   </div>
 
-  
   <div id="main">
 
-    
     <div id="question-area">
-      <p id="question-number">Question 1</p>
-      <p id="question-text">Loading...</p>
+      <h3 id="question-number">Question 1:</h3>
+      <hr id="question-divider">
+      <div id="question-text">Loading...</div>
 
+      <p id="options-label">Options :</p>
       <div id="options">
-        <button class="option" data-index="0">A. Option 1</button>
-        <button class="option" data-index="1">B. Option 2</button>
-        <button class="option" data-index="2">C. Option 3</button>
-        <button class="option" data-index="3">D. Option 4</button>
+        <label class="option"><input type="radio" name="option" data-index="0"/> <span>Option A</span></label>
+        <label class="option"><input type="radio" name="option" data-index="1"/> <span>Option B</span></label>
+        <label class="option"><input type="radio" name="option" data-index="2"/> <span>Option C</span></label>
+        <label class="option"><input type="radio" name="option" data-index="3"/> <span>Option D</span></label>
+      </div>
+      <hr id="question-divider">
+      <div id="action-buttons">
+        <button id="save-next" class="btn green">Save & Next</button>
+        <button id="clear" class="btn white">Clear</button>
+        <button id="save-mark" class="btn orange">Save & Mark for Review</button>
+        <button id="mark-next" class="btn blue">Mark for Review & Next</button>
       </div>
 
-      <div id="controls">
-        <button id="mark-review">Mark for Review</button>
-        <button id="clear">Clear</button>
-        <button id="prev">Previous</button>
-        <button id="next">Next</button>
+      <div id="nav-buttons">
+      <div><button id="prev" class="btn gray">&lt;&lt; Back</button>
+        <button id="next" class="btn gray">Next &gt;&gt;</button>
+      </div>
+        <button id="submit-btn" class="btn orange">Submit</button>
       </div>
     </div>
 
-    
     <div id="palette">
-      <h3>Question Palette</h3>
-      <div id="palette-grid">
-        
-      </div>
+
       <div id="legend">
-        <span class="not-visited">Not Visited</span>
-        <span class="not-answered">Not Answered</span>
-        <span class="answered">Answered</span>
-        <span class="marked">Marked</span>
+        <div class="legend-item">
+          <span class="circle gray"></span><p>Not Visited</p>
+        </div>
+        <div class="legend-item">
+          <span class="circle orange"></span><p>Not Answered</p>
+        </div>
+        <div class="legend-item">
+          <span class="circle green"></span><p>Answered</p>
+        </div>
+        <div class="legend-item">
+          <span class="circle purple"></span><p>Marked for Review</p>
+        </div>
+        <div class="legend-item">
+          <span class="circle blue"></span><p>Answered & Marked</p>
+        </div>
       </div>
-      <button id="submit-btn">Submit Test</button>
+
+      
+      <div id="palette-grid">
+       
+      </div>
+
     </div>
 
   </div>
+
+  <div id="footer">
+    <p>© All Rights Reserved - National Testing Agency</p>
+  </div>
+
   <script src="js/auth.js" type="module"></script>
-  <script src="js/questions.js"></script>
+  <script src="js/questions.js" type="module"></script>
   <script src="js/test.js" type="module"></script>
+
 </body>
 </html>

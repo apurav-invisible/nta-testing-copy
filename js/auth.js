@@ -6,14 +6,9 @@ if (!session) {
   window.location.href = 'login.html'
 }
 
-// Check karo sessionStorage mein flag hai ya nahi
-const loggedIn = document.cookie.includes("loggedIn=true")
-if (!loggedIn) {
-  await supabase.auth.signOut()
-  window.location.href = 'login.html'
-}
-
 const email = session.user.email
-document.getElementById('user-name').textContent = `user :- ${email}`
-proceed.addEventListener('click', () => {
-  console.log('Proceed button clicked')})
+const userNameEl = document.getElementById('user-name')
+const candidateNameEl = document.getElementById('candidate-name')
+
+if (userNameEl) userNameEl.textContent = email
+if (candidateNameEl) candidateNameEl.textContent = email.split('@')[0]

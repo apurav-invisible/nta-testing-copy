@@ -1,7 +1,7 @@
 import { supabase } from './supa.js'
 
-
 const { data: { session } } = await supabase.auth.getSession()
+
 const redirectByRole = (role) => {
   if (role === 'admin') {
     window.location.href = 'admin.html'
@@ -9,9 +9,9 @@ const redirectByRole = (role) => {
     window.location.href = 'instruction.html'
   }
 }
+
 if (session) {
-  const role = session.user.user_metadata.role
-  redirectByRole(role)
+  redirectByRole(session.user.user_metadata.role)
 }
 
 const loginform = document.getElementById("login-form")
@@ -34,14 +34,9 @@ loginform.addEventListener("submit", async (e) => {
     msg.textContent = "Login failed: " + error.message
     msg.style.color = "red"
   } else {
-    document.cookie = `loggedIn=true; path=/`
     const role = data.user.user_metadata.role
-  
     msg.textContent = "Login successful! Redirecting..."
     msg.style.color = "green"
-
-    setTimeout(() => {
-      redirectByRole(role)
-    }, 1000)
+    setTimeout(() => redirectByRole(role), 1000)
   }
 })
