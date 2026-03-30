@@ -105,15 +105,17 @@ hr {
     margin: 10px 0;
 }
 .circle {
-    width: 15px;
-    height: 15px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;   
     margin-right: 10px;
+    display: inline-block;
+    flex-shrink: 0;
 }
 .gray { background: #ccc; }
-.orange { background: orange; }
-.green { background: green; }
-.blue { background: blue; }
+.orange { background: #e14401; }
+.green { background: #2cc000; }
+.blue { background: #451b87; }
 .red { background: red; }
 
 #line{
@@ -155,7 +157,7 @@ hr {
     font-weight: bold;
     letter-spacing: 1px;
 
-    text-align: center;   /* 🔥 THIS FIXES YOUR ISSUE */
+    text-align: center;   
 }
 
 #header {
@@ -181,10 +183,10 @@ hr {
     border-radius: 10px;
 }
 #candidate-name{
-    color: rgba(252, 164, 0, 0.911)
+    color: #f8931e;
 }
 #exam-name{
-    color: rgba(252, 164, 0, 0.911)
+    color: #f8931e ;
 }
 #timer{
     background-color: rgb(0, 153, 255);
@@ -196,6 +198,7 @@ hr {
     display:flex;
     gap: 10px;
     margin: 20px auto;
+    padding:10px
 }
 .tab{
     padding: 10px 20px;
@@ -264,8 +267,60 @@ hr {
     cursor: pointer;
     font-weight: bold;
 }
-.btn.green  { color: white; }
-.btn.white   {  border: 1px solid black; }
-.btn.orange {  color: white; }
-.btn.blue {  color: white; }
+.btn.green  {background-color:#5cb85c; color: white;border:2px #50b050 solid;}
+.btn.white   {  border: 2px #d8d8d8 solid; }
+.btn.orange { background-color: #f0ad4e; color: white;border:2px #eea43c solid }
+.btn.blue { background-color: #337ab7; color: white;border:2px #2f70a8 solid }
 .btn.gray {  border:1px solid black;color: black; }
+
+#palette {
+    flex: 1.4;
+    padding: 15px;
+    overflow-y: auto;
+    border-left: 2px solid #ccc;
+    background-color: #f9f9f9;
+}
+#legend{
+    margin-bottom: 15px;
+    border: 2.5px dashed rgb(84, 84, 84);
+    padding: 15px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px 40px;
+}
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+#palette-grid{
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    
+    margin-top: 10px;
+}
+.palette-btn {
+    width: 35px;
+    height: 35px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 12px;
+    background-color: #ccc;
+    color: white;
+}
+.palette-btn.not-visited  { background-color: #ccc; }
+.palette-btn.not-answered { background-color: orange; }
+.palette-btn.answered     { background-color: green; }
+.palette-btn.marked       { background-color: blue; }
+.palette-btn.answered-marked { background-color: red; }
+
+#footer {
+    text-align: center;
+    padding: 10px;
+    background-color: #012b55;
+    font-size: 12px;
+    border-top: 1px solid #ccc;
+}
