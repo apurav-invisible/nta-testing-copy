@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Result</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    
+    <div id="header">
+        <div id="candidate-info">
+            <img src="" alt="candidate" id="candidate-img"/>
+            <div>
+                <p>Candidate Name : <span id="candidate-name">Loading...</span></p>
+                <p>Exam Name : <span id="exam-name">JEE-Main</span></p>
+                <p>Remaining Time : <span id="timer">00:00:00</span></p>
+            </div>
+        </div>
+    </div>
+
+   
+    <div id="score-card">
+        <h3>Score Card</h3>
+        <table id="score-table">
+            <tr>
+                <td>Total Questions</td>
+                <td id="total-questions">75</td>
+                <td>Total Attempted</td>
+                <td id="total-attempted">0</td>
+            </tr>
+            <tr>
+                <td>Correct Answers</td>
+                <td id="correct-answers">0</td>
+                <td>Incorrect Answers</td>
+                <td id="incorrect-answers">0</td>
+            </tr>
+            <tr>
+                <td>Score</td>
+                <td id="score">0</td>
+                <td></td>
+                <td></td>
+            </tr>
+        </table>
+    </div>
+
+    <div id="footer">
+        <p>© All Rights Reserved - National Testing Agency</p>
+    </div>
+
+    <script src="js/auth.js" type="module"></script>
+    <script src="js/result.js" type="module"></script>
+</body>
+</html>

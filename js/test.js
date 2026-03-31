@@ -6,6 +6,8 @@ let currentIndex = 0;
 let currentsubject="physics";
 let answers={};
 let marked = {};
+let visited = {};
+let selected={};
 
 
 questions = await getQuestions();
@@ -16,8 +18,10 @@ const getSubject=()=>{
 
 const renderQuestion =()=>{
     const subject = getSubject();
-  
     const q = subject[currentIndex];
+
+    
+    visited[q.id] = true;
 
     document.getElementById("question-number").textContent = `Question ${currentIndex+1}:`
     document.getElementById("question-text").textContent = q.question;
@@ -36,11 +40,17 @@ const renderQuestion =()=>{
             label.querySelector("input").checked = true;}
 
         label.querySelector("input").addEventListener("change", () => {
-            answers[q.id] = index
-            console.log("Answers:", answers)})
+            selected[q.id] = index
+    //         console.log("Answers:", answers)})
+    //         console.log("q.id:", q.id)
+    // console.log("q.id type:", typeof q.id)
+    // console.log("answers after save:", JSON.stringify(answers))
+            buildPalette();})
+        if (selected[q.id] !== undefined && selected[q.id] === index) {
+        label.querySelector("input").checked = true}
 
         alloptions.appendChild(label); })
-
+    
     
 
 
@@ -60,6 +70,24 @@ const buildPalette =()=>{
             renderQuestion();
             buildPalette();
         })
+
+    btn.classList.remove("not-visited", "answered", "marked", "marked-answered","not-answered");
+
+    if (marked[subject[i].id] && answers[subject[i].id] !== undefined) {
+    btn.classList.add("answered-marked")  // blue
+} else if (marked[subject[i].id]) {
+    btn.classList.add("marked")           // purple
+} else if (answers[subject[i].id] !== undefined) {
+    btn.classList.add("answered")         // green
+} else if (visited[subject[i].id]) {
+    btn.classList.add("not-answered")     // orange
+} else {
+    btn.classList.add("not-visited")      // gray
+}
+    if (i === currentIndex) {
+        btn.style.border = "1px solid black";
+}
+
     }}
 renderQuestion();
 buildPalette();
@@ -83,6 +111,7 @@ nextbtn.addEventListener("click",()=>{
     if ( currentIndex < subject.length -1){
         currentIndex++;
         renderQuestion();
+        buildPalette();
     }
 
 })
@@ -91,6 +120,63 @@ prevbtn.addEventListener("click",()=>{
     if (currentIndex > 0){
         currentIndex--;
         renderQuestion();
+        buildPalette();
     }
 })
+const saveAndNext = () => {
+    const subject = getSubject()
+    const q = subject[currentIndex]
+    if (selected[q.id] !== undefined) {
+        answers[q.id] = selected[q.id]
+    }
+    if (currentIndex < subject.length - 1) currentIndex++
+    renderQuestion()
+    buildPalette()
+}
+
+const clearResponse = () => {
+    const subject = getSubject()
+    const q = subject[currentIndex]
+    delete answers[q.id]
+    delete selected[q.id]
+    delete marked[q.id]
+    renderQuestion()
+    buildPalette()
+}
+
+const save_markbtn = () => {
+    const subject = getSubject()
+    const q = subject[currentIndex]
+    if (selected[q.id] !== undefined) {
+        answers[q.id] = selected[q.id]
+    }
+    marked[q.id] = true;
+    if (currentIndex < subject.length - 1) currentIndex++
+    renderQuestion()
+    buildPalette()}
+
+const markForReview = () => {
+    const subject = getSubject()
+    const q = subject[currentIndex]
+    marked[q.id] = true
+    delete selected[q.id]
+    delete answers[q.id]
+    if (currentIndex < subject.length - 1) currentIndex++
+    renderQuestion()
+    buildPalette()
+} 
+
+    document.getElementById("save-next").addEventListener("click", saveAndNext)
+    document.getElementById("clear").addEventListener("click", clearResponse)
+    document.getElementById("save-mark").addEventListener("click", save_markbtn)
+    document.getElementById("mark-next").addEventListener("click", markForReview)
+
+
+    document.getElementById("submit-btn").addEventListener("click", () => {
+        window.location.href = "confirmation.html"
+    })
+    
+
+
+
 

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exam Summary</title>
+    <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+    <div id="header">
+    <div id="candidate-info">
+        <img src="" alt="candidate" id="candidate-img"/>
+        <div>
+        <p>Candidate Name : <span id="candidate-name">Loading...</span></p>
+        <p>Exam Name : <span id="exam-name">JEE-Main</span></p>
+        <p>Remaining Time : <span id="timer">02:59:54</span></p>
+        </div>
+
+    </div>
+    <div id="lang-select">
+        <select>
+        <option>English</option>
+        <option>Hindi</option>
+        </select>
+    </div>
+    </div>
+    <h2 style="text-align: center;  font-family: Arial, Helvetica, sans-serif; font-weight: 1000; color: rgb(28, 28, 28) ">Exam Summary</h2>
+    <div class="summary-box">
+    
+
+        <div class="summary-row">
+            <div class="summary-item">
+                <p>No of Questions</p>
+                <span>75</span>
+            </div>
+
+            <div class="summary-item">
+                <p>Answered</p>
+                <span>0</span>
+            </div>
+
+            <div class="summary-item">
+                <p>Not Answered</p>
+                <span>1</span>
+            </div>
+
+            <div class="summary-item">
+                <p>Marked for Review</p>
+                <span>0</span>
+            </div>
+
+            <div class="summary-item wide">
+                <p>Answered & Marked for Review <br>(will be considered for evaluation)</p>
+                <span>0</span>
+            </div>
+
+                <div class="summary-item">
+                    <p>Not Visited</p>
+                    <span>74</span>
+                </div>
+        </div>
+    </div>
+    <div class="confirmation">
+        <p>Are you sure you want to submit for final marking?<br> No changes will be allowed after submission.</p>
+        <button id="confirm-submit" class="btn whites">YES</button>
+        <button id="cancel-submit" class="btn whites">NO</button>
+    </div>
+    <div id="footer">
+    <p style="color:white">© All Rights Reserved - National Testing Agency</p>
+    </div>
+<script src="js/auth.js" type="module"></script>
+<script src="js/confirmation.js" type="module"></script>   
+</body>
+</html>
