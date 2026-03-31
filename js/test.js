@@ -1,4 +1,4 @@
-import {supabase} from './supa.js';
+
 import {getQuestions} from './questions.js';
 
 let questions  = [];
@@ -9,9 +9,23 @@ let marked = {};
 let visited = {};
 let selected={};
 
-
+const saveToStorage = () => {
+    localStorage.setItem("answers", JSON.stringify(answers))
+    localStorage.setItem("marked", JSON.stringify(marked))
+    localStorage.setItem("visited", JSON.stringify(visited))
+    localStorage.setItem("questions", JSON.stringify(questions))
+}
 questions = await getQuestions();
 
+const savedAnswers = localStorage.getItem("answers")
+const savedMarked = localStorage.getItem("marked")
+const savedVisited = localStorage.getItem("visited")
+// const savedAnsAndVisited = localStorage.getItem("questions")
+
+if (savedAnswers) answers = JSON.parse(savedAnswers)
+if (savedMarked) marked = JSON.parse(savedMarked)
+if (savedVisited) visited = JSON.parse(savedVisited)
+// Questions fetch ke baad ye add karo
 const getSubject=()=>{
     return questions.filter(q=>q.subject=== currentsubject)
 }
@@ -91,6 +105,13 @@ const buildPalette =()=>{
     }}
 renderQuestion();
 buildPalette();
+saveToStorage();
+
+
+
+// Phir render karo
+renderQuestion()
+buildPalette()
 
 const tabs = document.querySelectorAll(".tab");
 tabs.forEach(tab=>{
@@ -101,6 +122,7 @@ tabs.forEach(tab=>{
         currentIndex=0;
         renderQuestion();
         buildPalette();
+        saveToStorage();
     })})
 
 const nextbtn = document.getElementById("next");
@@ -132,6 +154,7 @@ const saveAndNext = () => {
     if (currentIndex < subject.length - 1) currentIndex++
     renderQuestion()
     buildPalette()
+    saveToStorage();
 }
 
 const clearResponse = () => {
@@ -142,6 +165,7 @@ const clearResponse = () => {
     delete marked[q.id]
     renderQuestion()
     buildPalette()
+    saveToStorage();
 }
 
 const save_markbtn = () => {
@@ -153,7 +177,8 @@ const save_markbtn = () => {
     marked[q.id] = true;
     if (currentIndex < subject.length - 1) currentIndex++
     renderQuestion()
-    buildPalette()}
+    buildPalette()
+    saveToStorage()}
 
 const markForReview = () => {
     const subject = getSubject()
@@ -164,6 +189,7 @@ const markForReview = () => {
     if (currentIndex < subject.length - 1) currentIndex++
     renderQuestion()
     buildPalette()
+    saveToStorage();
 } 
 
     document.getElementById("save-next").addEventListener("click", saveAndNext)
@@ -173,6 +199,7 @@ const markForReview = () => {
 
 
     document.getElementById("submit-btn").addEventListener("click", () => {
+        saveToStorage();
         window.location.href = "confirmation.html"
     })
     

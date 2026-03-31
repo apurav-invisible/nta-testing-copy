@@ -4,11 +4,12 @@ const { data: { session } } = await supabase.auth.getSession()
 
 if (!session) {
   window.location.href = 'login.html'
+} else {
+  const email = session.user.email
+
+  const userNameEl = document.getElementById('user-name')
+  const candidateNameEl = document.getElementById('candidate-name')
+
+  if (userNameEl) userNameEl.textContent = email
+  if (candidateNameEl) candidateNameEl.textContent = email.split('@')[0]
 }
-
-const email = session.user.email
-const userNameEl = document.getElementById('user-name')
-const candidateNameEl = document.getElementById('candidate-name')
-
-if (userNameEl) userNameEl.textContent = email
-if (candidateNameEl) candidateNameEl.textContent = email.split('@')[0]
