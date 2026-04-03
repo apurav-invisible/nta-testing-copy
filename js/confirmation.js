@@ -1,5 +1,5 @@
 import { supabase } from './supa.js'
-
+import { getQuestions } from './questions.js'
 document.addEventListener('DOMContentLoaded', async () => {
   console.log("URL:", window.location.href)
   console.log("total-q element:", document.getElementById("total-q"))
@@ -11,8 +11,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const answers = JSON.parse(localStorage.getItem("answers") || "{}")
     const marked = JSON.parse(localStorage.getItem("marked") || "{}")
     const visited = JSON.parse(localStorage.getItem("visited") || "{}")
-    const questions = JSON.parse(localStorage.getItem("questions") || "[]")
-
+    const questions = await getQuestions()  // correct answers fresh aayenge
     const total = questions.length
     const visitedIds = Object.keys(visited)
     const answeredCount = Object.keys(answers).filter(id => answers[id]).length
@@ -34,5 +33,9 @@ document.addEventListener('DOMContentLoaded', async () => {
     document.getElementById("cancel-submit").addEventListener("click", () => {
       window.location.href = "index.html"
     })
+    history.pushState(null, null, location.href)
+window.addEventListener('popstate', () => {
+    history.pushState(null, null, location.href)
+})
   }
 })

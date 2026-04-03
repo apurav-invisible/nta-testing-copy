@@ -1,4 +1,4 @@
-
+import { supabase } from './supa.js';
 import {getQuestions} from './questions.js';
 
 let questions  = [];
@@ -8,12 +8,11 @@ let answers={};
 let marked = {};
 let visited = {};
 let selected={};
-
+const { data: { session } } = await supabase.auth.getSession()
 const saveToStorage = () => {
     localStorage.setItem("answers", JSON.stringify(answers))
     localStorage.setItem("marked", JSON.stringify(marked))
     localStorage.setItem("visited", JSON.stringify(visited))
-    localStorage.setItem("questions", JSON.stringify(questions))
 }
 questions = await getQuestions();
 
@@ -107,12 +106,6 @@ renderQuestion();
 buildPalette();
 saveToStorage();
 
-
-
-// Phir render karo
-renderQuestion()
-buildPalette()
-
 const tabs = document.querySelectorAll(".tab");
 tabs.forEach(tab=>{
     tab.addEventListener("click",()=>{
@@ -202,7 +195,50 @@ const markForReview = () => {
         saveToStorage();
         window.location.href = "confirmation.html"
     })
-    
+    history.pushState(null, null, location.href)
+    window.addEventListener('popstate', () => {
+    history.pushState(null, null, location.href)
+
+})
+// Timer
+const startTimer = async () => {
+    const { data, error } = await supabase
+        .from("sessions")
+        .select("start_time")
+        .eq("user_id", session.user.id)
+        .eq("submitted", false)
+        .order("start_time", { ascending: false })
+        .limit(1)
+        .maybeSingle()
+
+    if (error || !data) return
+
+    const startTime = new Date(data.start_time).getTime()
+    const duration = 3 * 60 * 60 * 1000
+    const timerEl = document.getElementById("timer")
+
+    const interval = setInterval(() => {
+        const now = Date.now()
+        const elapsed = now - startTime
+        const remaining = duration - elapsed
+
+        if (remaining <= 0) {
+            clearInterval(interval)
+            timerEl.textContent = "00:00:00"
+            saveToStorage()
+            window.location.href = "result.html"
+            return
+        }
+
+        const hours = Math.floor(remaining / (1000 * 60 * 60))
+        const mins = Math.floor((remaining % (1000 * 60 * 60)) / (1000 * 60))
+        const secs = Math.floor((remaining % (1000 * 60)) / 1000)
+
+        timerEl.textContent = `${String(hours).padStart(2, '0')}:${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`
+    }, 1000)
+}
+
+startTimer()
 
 
 

@@ -12,4 +12,9 @@ if (!session) {
 
   if (userNameEl) userNameEl.textContent = email
   if (candidateNameEl) candidateNameEl.textContent = email.split('@')[0]
+
+  history.pushState(null, null, location.href)
+  window.addEventListener('popstate', () => {
+    history.pushState(null, null, location.href)
+})
 }
